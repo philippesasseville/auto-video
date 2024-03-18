@@ -5,6 +5,7 @@ __pycache__/
 
 bin/*
 output/*
+cookies/*
 
 # C extensions
 *.so
