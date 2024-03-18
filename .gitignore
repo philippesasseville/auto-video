@@ -4,8 +4,12 @@ __pycache__/
 *$py.class
 
 bin/*
+!bin/.gitkeep
 output/*
+!output/.gitkeep
 cookies/*
+!cookies/.gitkeep
+
 
 # C extensions
 *.so
