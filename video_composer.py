@@ -61,6 +61,9 @@ def compose_video_parts(output_name, title, selftext):
     current_clip_duration = 0
     current_clip_index = 1
     current_clips = []
+
+    videos = []
+
     for clip in composite_clips:
         if current_clip_duration + clip.duration <= target_length:
             current_clips.append(clip)
@@ -75,6 +78,10 @@ def compose_video_parts(output_name, title, selftext):
             # Composite the cropped image on top of the final clip
             final_clip = CompositeVideoClip([final_clip, cropped_clip])
             final_clip.write_videofile(f'output/{output_name}_part{current_clip_index}.mp4')
+            videos.append({
+                'video': f'output/{output_name}_part{current_clip_index}.mp4',
+                'description': f'{output_name} ,part {current_clip_index}'
+            })
             current_clips = [clip]
             current_clip_duration = clip.duration
             current_clip_index += 1
@@ -90,6 +97,12 @@ def compose_video_parts(output_name, title, selftext):
         # Composite the cropped image on top of the final clip
         final_clip = CompositeVideoClip([final_clip, cropped_clip])
         final_clip.write_videofile(f'output/{output_name}_part{current_clip_index}.mp4')
+        videos.append({
+            'video': f'output/{output_name}_part{current_clip_index}.mp4',
+            'description': f'{output_name} ,part {current_clip_index}'
+        })
+    
+    return videos
 
 # Function to split text into sentences using spaCy
 def split_sentences(text):
